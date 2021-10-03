@@ -16,7 +16,7 @@ pipeline {
     stage('Sonar Analysis') {
       environment {
         scannerSonarHome = tool 'SONAR_SCANNER'
-        exclusaoCobertura = 'sonar.coverage.exclusions=**/.mvn/**, **/src/test/**,**/model/**,**Aplication.java'
+        exclusaoCobertura = 'sonar.coverage.exclusions= "**/.mvn/**, **/src/test/**,**/model/**,**Aplication.java"'
       }
       steps {
         withSonarQubeEnv('SONAR_LOCAL') {
