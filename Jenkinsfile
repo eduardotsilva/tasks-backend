@@ -16,7 +16,6 @@ pipeline {
     stage('Sonar Analysis') {
       environment {
         scannerSonarHome = tool 'SONAR_SCANNER'
-        exclusaoCobertura = "sonar.coverage.exclusions= '**/.mvn/**, **/src/test/**,**/model/**,**Aplication.java'"
       }
       steps {
         withSonarQubeEnv('SONAR_LOCAL') {
@@ -24,6 +23,15 @@ pipeline {
         }
       }
     }
+
+    stage('Quality Gate') {
+          steps {
+			timeout(time: 1, unit: 'MINUTES')  {
+				waitForQualityGate abortPipeline: true	
+			}
+          }
+        }
+
 
   }
 }
